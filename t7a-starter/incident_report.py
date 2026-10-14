@@ -39,7 +39,14 @@ print("South DC total downtime:", calculate_total(south_dc))
 print("East DC total downtime:", calculate_total(east_dc))
 print("West DC total downtime:", calculate_total(west_dc))
  
-#print("Most recent North DC incident:", north_dc[4])
+print(len(north_dc)) 
+# index start from 0, not 1, althou the length is 4(function return the count of elements and start from 1)
+# index len()-1, it will give us the last element in the list
+print("Most recent North DC incident:", north_dc[len(north_dc)-1])
+print("Most recent South DC incident:", south_dc[len(south_dc)-1])
+print("Most recent East DC incident:", east_dc[len(east_dc)-1])
+print("Most recent West DC incident:", west_dc[len(west_dc)-1])
+
 
  
 #new_minutes = int(input("Log a new North DC incident (minutes): "))
