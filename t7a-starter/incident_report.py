@@ -7,25 +7,7 @@ west_dc = [90, 20, 45]          # downtime minutes per incident
 south_dc = [56, 30, 25]
 east_dc = [67, 21, 17]
  
-total = 0
-for m in north_dc:
-    total = total + m
-print("North DC total downtime:", total)
- 
-total = 0
-for m in west_dc:
-    total = total + m
-print("West DC total downtime:", total)
- 
-total = 0
-for m in south_dc:
-    total = total + m
-print("South DC total downtime:", total)
- 
-total = 0
-for m in east_dc:
-    total = total + m
-print("East DC total downtime:", total)
+
 
 def calculate_total(numbers):
     total=0;
@@ -47,8 +29,33 @@ print("Most recent South DC incident:", south_dc[len(south_dc)-1])
 print("Most recent East DC incident:", east_dc[len(east_dc)-1])
 print("Most recent West DC incident:", west_dc[len(west_dc)-1])
 
+# branch_name= 'North_DC'
+# raw = input(f"Log a new {branch_name} incident(minutes): ")
+# while not raw.isdigit():
+#    print("Please enter a whole number, like 30.")
+#    raw = input(f"Log a new {branch_name} incident (minutes): ")
+# new_minutes=int(raw)
+# north_dc.append(new_minutes)
 
- 
-#new_minutes = int(input("Log a new North DC incident (minutes): "))
-#north_dc.append(new_minutes)
-#print("New North DC total:", sum(north_dc))
+# print(f"New {branch_name} total:",calculate_total(north_dc))
+
+branches = {
+"North_DC":north_dc,
+"South_DC":south_dc,
+"West_DC":west_dc,
+"East_DC":east_dc    
+}
+branch_name = "North_DC"
+while True:
+    try:
+        new_minutes = int(input(f"Log a new {branch_name} incident (minutes): "))
+        if new_minutes<0:
+           #keep asking until the user enters a non-nagative integer 
+            print("Minutes cannot be nagative.")
+            continue # loop will continue until user will type a positive number
+        #add validated minutes to the selected branch
+        branches[branch_name].append(new_minutes) 
+        break # exit loop after successfull input
+    except ValueError: # handle exception (invalid input)
+        print("Please enter a whole number, like 30")
+print(f"New {branch_name} total: {calculate_total(branches[branch_name])}")         
